@@ -18,4 +18,5 @@ export interface Section {
 
 export interface SectionProps extends Section {
   isActive: boolean
+  onButtonClick?: () => void
 }
