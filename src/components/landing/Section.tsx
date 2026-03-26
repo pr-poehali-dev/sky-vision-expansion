@@ -47,7 +47,7 @@ export default function Section({ id, title, subtitle, content, isActive, showBu
           {courses.map((course, i) => (
             <motion.div
               key={course.title}
-              className="border border-neutral-800 bg-neutral-900/60 backdrop-blur-sm rounded-xl p-4 flex flex-col gap-2 hover:border-neutral-600 transition-colors cursor-pointer"
+              className="border border-neutral-800 bg-neutral-900/60 backdrop-blur-sm rounded-xl p-4 flex flex-col gap-2 hover:border-neutral-600 transition-colors group"
               initial={hidden}
               animate={isActive ? visible : hidden}
               transition={{ duration: 0.4, delay: 0.25 + i * 0.07 }}
@@ -56,7 +56,13 @@ export default function Section({ id, title, subtitle, content, isActive, showBu
                 {course.tag}
               </Badge>
               <p className="text-white font-semibold text-sm leading-snug">{course.title}</p>
-              <p className="text-neutral-500 text-xs leading-relaxed">{course.description}</p>
+              <p className="text-neutral-500 text-xs leading-relaxed flex-1">{course.description}</p>
+              <button
+                onClick={onButtonClick}
+                className="mt-1 text-xs text-[#FF4D00] border border-[#FF4D00] rounded-lg py-1.5 px-3 hover:bg-[#FF4D00] hover:text-black transition-colors w-full"
+              >
+                Записаться
+              </button>
             </motion.div>
           ))}
         </motion.div>
