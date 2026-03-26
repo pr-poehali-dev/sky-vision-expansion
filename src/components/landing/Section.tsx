@@ -1,8 +1,9 @@
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 import type { SectionProps } from "@/types"
 
-export default function Section({ id, title, subtitle, content, isActive, showButton, buttonText }: SectionProps) {
+export default function Section({ id, title, subtitle, content, isActive, showButton, buttonText, courses }: SectionProps) {
   return (
     <section id={id} className="relative h-screen w-full snap-start flex flex-col justify-center p-8 md:p-16 lg:p-24">
       {subtitle && (
@@ -32,6 +33,30 @@ export default function Section({ id, title, subtitle, content, isActive, showBu
         >
           {content}
         </motion.p>
+      )}
+      {courses && (
+        <motion.div
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10 max-w-5xl"
+          initial={{ opacity: 0, y: 40 }}
+          animate={isActive ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          {courses.map((course, i) => (
+            <motion.div
+              key={course.title}
+              className="border border-neutral-800 bg-neutral-900/60 backdrop-blur-sm rounded-xl p-5 flex flex-col gap-3 hover:border-neutral-600 transition-colors cursor-pointer"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isActive ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.4, delay: 0.3 + i * 0.08 }}
+            >
+              <Badge variant="outline" className="text-[#FF4D00] border-[#FF4D00] w-fit text-xs">
+                {course.tag}
+              </Badge>
+              <p className="text-white font-semibold text-sm leading-snug">{course.title}</p>
+              <p className="text-neutral-500 text-xs leading-relaxed">{course.description}</p>
+            </motion.div>
+          ))}
+        </motion.div>
       )}
       {showButton && (
         <motion.div

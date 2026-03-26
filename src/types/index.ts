@@ -1,5 +1,11 @@
 import type { ReactNode } from "react"
 
+export interface CourseCard {
+  title: string
+  description: string
+  tag: string
+}
+
 export interface Section {
   id: string
   title: string
@@ -7,6 +13,7 @@ export interface Section {
   content?: string
   showButton?: boolean
   buttonText?: string
+  courses?: CourseCard[]
 }
 
 export interface SectionProps extends Section {
