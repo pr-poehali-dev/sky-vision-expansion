@@ -4,13 +4,16 @@ import { Badge } from "@/components/ui/badge"
 import type { SectionProps } from "@/types"
 
 export default function Section({ id, title, subtitle, content, isActive, showButton, buttonText, courses, onButtonClick }: SectionProps) {
+  const visible = { opacity: 1, y: 0 }
+  const hidden = { opacity: 0, y: 30 }
+
   return (
-    <section id={id} className="relative h-screen w-full snap-start flex flex-col justify-center p-8 md:p-16 lg:p-24">
+    <section id={id} className="relative h-screen w-full snap-start flex flex-col justify-center p-8 md:p-16 lg:p-24 overflow-hidden">
       {subtitle && (
         <motion.div
-          className="mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isActive ? { opacity: 1, y: 0 } : {}}
+          className="mb-8"
+          initial={hidden}
+          animate={isActive ? visible : hidden}
           transition={{ duration: 0.5 }}
         >
           {subtitle}
@@ -18,36 +21,36 @@ export default function Section({ id, title, subtitle, content, isActive, showBu
       )}
       <motion.h2
         className="text-4xl md:text-6xl lg:text-[5rem] xl:text-[6rem] font-bold leading-[1.1] tracking-tight max-w-4xl text-white"
-        initial={{ opacity: 0, y: 50 }}
-        animate={isActive ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.5 }}
+        initial={hidden}
+        animate={isActive ? visible : hidden}
+        transition={{ duration: 0.5, delay: 0.05 }}
       >
         {title}
       </motion.h2>
       {content && (
         <motion.p
-          className="text-lg md:text-xl lg:text-2xl max-w-2xl mt-6 text-neutral-400"
-          initial={{ opacity: 0, y: 50 }}
-          animate={isActive ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-lg md:text-xl max-w-2xl mt-4 text-neutral-400"
+          initial={hidden}
+          animate={isActive ? visible : hidden}
+          transition={{ duration: 0.5, delay: 0.15 }}
         >
           {content}
         </motion.p>
       )}
       {courses && (
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10 max-w-5xl"
-          initial={{ opacity: 0, y: 40 }}
-          animate={isActive ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6 max-w-5xl"
+          initial={hidden}
+          animate={isActive ? visible : hidden}
+          transition={{ duration: 0.5, delay: 0.25 }}
         >
           {courses.map((course, i) => (
             <motion.div
               key={course.title}
-              className="border border-neutral-800 bg-neutral-900/60 backdrop-blur-sm rounded-xl p-5 flex flex-col gap-3 hover:border-neutral-600 transition-colors cursor-pointer"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isActive ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.3 + i * 0.08 }}
+              className="border border-neutral-800 bg-neutral-900/60 backdrop-blur-sm rounded-xl p-4 flex flex-col gap-2 hover:border-neutral-600 transition-colors cursor-pointer"
+              initial={hidden}
+              animate={isActive ? visible : hidden}
+              transition={{ duration: 0.4, delay: 0.25 + i * 0.07 }}
             >
               <Badge variant="outline" className="text-[#FF4D00] border-[#FF4D00] w-fit text-xs">
                 {course.tag}
@@ -60,10 +63,10 @@ export default function Section({ id, title, subtitle, content, isActive, showBu
       )}
       {showButton && (
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isActive ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-12 md:mt-16"
+          initial={hidden}
+          animate={isActive ? visible : hidden}
+          transition={{ duration: 0.5, delay: 0.35 }}
+          className="mt-8"
         >
           <Button
             variant="outline"
